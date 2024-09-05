@@ -51,7 +51,7 @@ type `python` once you can see these `>>>` type
 
 ```torch.cuda.get_device_name(0)``` -- This will display the GPU device your cuda is currently accessing
 
-## Pre-Processing Dataset (Generate Spectrogram from song file)
+## Proces Dataset (Generate Spectrogram from song file)
 place all your song files inside `songs_for_training` folder in the main `boutRight_yolo` folder
 
 1. Prepare a virtual envrinoment for labelImg
@@ -93,13 +93,38 @@ place all your song files inside `songs_for_training` folder in the main `boutRi
    ```
    This will open a small window to annotate the spectrograms
 
-7. Place all your annotation files inside `annotations` folder in the main directory, then run the third cell (Split Dataset section) from the notebook. 
+7. Place all your annotation files inside `annotations` folder in the main directory, then run the third cell (Split Dataset section) from the notebook.
+
+## Train Network
+8. Run the network - you can adjust img_size (--img), epochs (--epochs)
+
+9. Once the training is done, you can run `val.py` to evaluate the performance of the network in your validaiton dataset.
 
    
-   
+Common known issues-
 
+while training the network you might come across the following RunTimeError 
+
+`NotImplementedError: Could not run 'torchvision::nms' with arguments from the 'CUDA' backend. This could be because the operator doesn't exist for this backend, or was omitted during the selective/custom build process (if using custom build). If you are a Facebook employee using PyTorch on mobile, please visit https://fburl.com/ptmfixes for possible resolutions. 'torchvision::nms' is only available for these backends: [CPU, Meta, QuantizedCPU, BackendSelect, Python, FuncTorchDynamicLayerBackMode, Functionalize, Named, Conjugate, Negative, ZeroTensor, ADInplaceOrView, AutogradOther, AutogradCPU, AutogradCUDA, AutogradXLA, AutogradMPS, AutogradXPU, AutogradHPU, AutogradLazy, AutogradMeta, Tracer, AutocastCPU, AutocastXPU, AutocastCUDA, FuncTorchBatched, BatchedNestedTensor, FuncTorchVmapMode, Batched, VmapMode, FuncTorchGradWrapper, PythonTLSSnapshot, FuncTorchDynamicLayerFrontMode, PreDispatch, PythonDispatcher].
+`
+
+Fix the issue by uninstalling torch 
+
+```pip uninstall torch torchvision```
+
+then installing torchvision and torchaudio with the proper cuda verison
+
+```pip install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu116```
+
+## Model Inference
    
-   
+   If you want to use the pretrained model and run it for your custom dataset without training, you can use `boutRight_yolo_infer` notebook
+   1. Open ```boutRight_yolo_infer.ipynb```
+   2. Create a temporary folder called `Temp` and change the directory of ```temp_path``` to your specified directory
+      ```
+      temp_path = {path/to/temp_folder}
+      ```
+
 
 
 
