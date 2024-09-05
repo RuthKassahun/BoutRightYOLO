@@ -84,13 +84,18 @@ place all your song files inside `songs_for_training` folder in the main `boutRi
 
 4. Open boutRight_yolo_train.ipynb jupyter notebook in visual studio code or in localhost
    This will go through all wav files in the given `songs_for_training` folder and create a new folder named `images_for_training` inside your main directory and add all the generated spectrograms.
+   Run the first two cells
 
-5. Open LabelImg
+6. Open LabelImg
    Inside labelImg conda envirnoment type
    ```
    labelImg
    ```
    This will open a small window to annotate the spectrograms
+
+7. Place all your annotation files inside `annotations` folder in the main directory, then run the third cell (Split Dataset section) from the notebook. 
+
+   
    
 
    
